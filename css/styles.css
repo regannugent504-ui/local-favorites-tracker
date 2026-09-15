@@ -21,11 +21,14 @@ img {
    ========================== */
 :root {
     /* Color */
-    --color-bg: #fcf8e6;
+    --color-accent: #4d1979;
+    --color-accent-strong: #321052;
+    --color-text: #172033;
+    --color-muted: #657186;
+    --color-border: #d9dfeb;
+    --color-bg: #f7f8fb;
     --color-surface: #ffffff;
-    --color-text: #422a22;
-    --color-muted: #6b7280;
-    --color-accent: #fadaee;
+    --color-surface-alt: #f1f5f9;
 
     /* Spacing — a modular scale */
     --space-sm: 0.5rem;
@@ -48,7 +51,7 @@ img {
     /* Lab06 */
     --font-display: "Georgia", "Times New Roman", serif;
     --font-body: "Helvetica Neue", Arial, sans-serif;
-    --color-surface-alt: #fadaee;
+    --color-surface-alt: #4d1979;
     --radius-md: 8px;
 
     /* Lab07 */
@@ -107,305 +110,16 @@ header {
     background-color: var(--color-surface-alt);
     margin-bottom: var(--space-lg);
 }
-.header-text { flex: 1; }
-.header-pic {
-    flex: 1;
-    background-color: var(--color-surface);
-    min-height: 18rem;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-muted);
-}
-
-nav {
-    padding: var(--space-md) 0;
-}
-nav a {
-    color: var(--color-text);
-    text-decoration: none;
-}
-nav a:hover { color: var(--color-accent); }
-
-section { margin-bottom: var(--space-xl); }
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.nav-container .logo {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  letter-spacing: 0.03em;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.nav-links { display: flex; gap: var(--space-lg); }
-.logo {
-    font-size: var(--text-h3);
-    font-weight: bold;
-    color: var(--color-text);
-    text-decoration: none;
-}
-.nav-links a {
-  color: var(--ink);
-  text-decoration: none;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-  transition: border-color 0.2s ease;
-}
-.nav-links a:hover {
-  border-bottom-color: var(--accent);
-}
 
 header {
     /* ...existing Lab 06 declarations... */
     flex-wrap: wrap;
 }
-.header-text { flex: 1; min-width: 16rem; }
-.header-pic {
-    /* ...existing Lab 06 declarations... */
-    min-width: 16rem;
-}
-
-.nav-container {
-    /* ...existing declarations... */
-    flex-wrap: wrap;
-    gap: var(--space-md);
-}
-
-/* Lab07 */
-.skills-grid {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: var(--space-md);
-}
-.skill-card {
-    padding: var(--space-md);
-    background-color: var(--color-surface-alt);
-    border-radius: var(--radius-md);
-}
-
-.about {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-lg);   
-}
-.about-image { flex: 1; min-width: 16rem; }
-.about-image img { width: 100%; border-radius: var(--radius-md); }
-.about-text { flex: 2; min-width: 16rem; max-width: var(--reading-width); }
-
-
-
-.project-list {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-}
-@media (min-width: 768px) {
-    .project-list { grid-template-columns: 1fr 1fr; }
-    .project-card.featured { grid-column: span 2; }
-}
-
-.project-card {
-    padding: var(--space-lg);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-}
- 
-resume img {
-    max-width: 320px;
-    border: 1px solid var(--color-rule);
-    border-radius: 4 px;
-    transition: opacity var(--transition-fast);
-}
-
-resume a:hover img {
-    opacity: 0.85;
-}
-
-/* ---------- CONTACT SECTION ---------- */
-  .contact {
-    background: #fadaee;
-    padding: 70px 6%;
-    text-align: center;
-  }
-
-  .contact h2 {
-    font-size: 2rem;
-    margin: 0 0 12px;
-  }
-
-  .contact p {
-    color: var(--muted);
-    max-width: 500px;
-    margin: 0 auto 30px;
-  }
-
-  form.contact-form {
-    max-width: 480px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    text-align: left;
-    
-  }
-
-  form.contact-form label {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 4px;
-    display: block;
-    
-  }
-
-  form.contact-form input,
-  form.contact-form textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-family: inherit;
-    background: #fff;
-  }
-
-  form.contact-form textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
-
-  form.contact-form button {
-    align-self: center;
-    padding: 12px 40px;
-    background: var(--accent);
-    color: #473f3f;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  form.contact-form button:hover {
-    background: #d5cfcf;
-  }
-
-/* ---------- PROJECT GRID ---------- */
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 40px 6% 80px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .project-card {
-    background-color: #fadaee; /* swap this hex for your shade of pink */
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    cursor: pointer;
-    
-  }
-
-  .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-  }
-
-  .project-card .thumb {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    background: #d8d8d5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-
-  .project-card .thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-
-  }
-
-  .project-card .info {
-    padding: 16px 18px;
-  }
-
-  .project-card .info .category {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--muted);
-    margin: 0 0 6px;
-  }
-
-  .project-card .info h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-project-card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  padding: 1rem;
-  border-radius: 4px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.project-card-link:hover,
-.project-card-link:focus {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-}
-.projects {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-
-  
   h1 {
   text-align: center;
 }
 
-.home h1 {
-  text-align: left; /* or whatever the homepage should keep */
-}
 
-contact {
-  text-align: center;
-}
-
-.home #contact {
-  text-align: left;
-}
-.project-intro {
-  text-align: center;
-}
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
   .nav-container { flex-direction: column; gap: 1rem; align-items: flex-start; }
@@ -420,101 +134,27 @@ footer {
   text-align: center;
 }
 
-/* Force the two Career Highlights boxes side by side */
-.highlights-row {
-    display: flex;
-    gap: 10px; 
-    align-items: flex-start;
-}
-
-.highlights-row .project-list {
-    flex: 1;
-    margin: 0;
-}
-.highlights-row {
-    display: flex;
-    gap: 20px;
-    align-items: stretch;   /* changed from flex-start */
-}
-
-.highlights-row .project-list {
-    flex: 1;
-    margin: 0;
-    list-style: none;
-    padding: 0;
-}
-
-.highlights-row .project-card {
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-.highlights-row .project-card .header-pic {
-    margin-top: auto;   /* pushes the image to the bottom so both cards' images line up */
-}
-
-.highlights-row .project-card img {
-    width: 100%;
-    height: 200px;          /* pick a height that fits your design */
-    object-fit: cover;      /* crops the image to fill that height without distorting */
+/* FORMS */
+label {
     display: block;
-}
-.highlights-row .project-list {
-    flex: 1;
-    margin: 0;
-    list-style: none;
-    padding: 0;
-    display: flex;           /* new */
+    margin-bottom: var(--space-sm);
 }
 
-.highlights-row .project-card {
-    width: 100%;              /* new — overrides any fixed width from .project-card elsewhere */
-    max-width: none;          /* new — in case a max-width is set too */
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;             /* add some breathing room inside the card */
-}
-
-.highlights-row .project-card .header-pic {
-    margin-top: auto;
-}
-
-.highlights-row .project-card img {
+input,
+select,
+textarea {
     width: 100%;
-    height: 200px;
-    object-fit: contain;   /* changed from cover — shows the whole image, no cropping */
-    background-color: #f4f4f4;  /* fills empty space around the image so it doesn't look bare */
-    display: block;
-    border-radius: 6px;
+    font: inherit;
+    margin-bottom: var(--space-md);
 }
-.highlights-row .project-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 6px;
-}
-a.project-card {
-  text-decoration: none;
-  color: inherit;
-}
-#contact a {
-    color: #473f3f;
-} 
-
-img { max-width: 100%; height: auto; }
-
-@media (max-width: 600px) {
-     /* mobile-specific overrides */
-   }
-
 .favorites-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-lg);
+}
+
+.empty-message {
+    grid-column: 1 / -1;
 }
 
 @media (min-width: 768px) {
