@@ -1,0 +1,2 @@
+# local-favorites-tracker
+
