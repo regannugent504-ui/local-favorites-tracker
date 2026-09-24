@@ -2,6 +2,8 @@ let favorites = [];
 
 const form = document.getElementById('add-favorite-form');
 const favoritesList = document.getElementById('favorites-list');
+const searchInput = document.getElementById('search-input');          // NEW
+const categoryFilter = document.getElementById('category-filter');    // NEW
 
 
 function addFavorite(event) {
@@ -30,12 +32,39 @@ function addFavorite(event) {
 form.addEventListener('submit', addFavorite);
 
 function displayFavorites() {
+    searchInput.value = '';
+    categoryFilter.value = 'all';
+    searchFavorites();
+}
+
+
+function searchFavorites() {
+    const searchText = searchInput.value.toLowerCase().trim();
+    const selectedCategory = categoryFilter.value;
+
+    const filtered = favorites.filter(function(favorite) {
+        const matchesSearch = searchText === '' ||
+            favorite.name.toLowerCase().includes(searchText) ||
+            favorite.notes.toLowerCase().includes(searchText);
+        const matchesCategory = selectedCategory === 'all' ||
+            favorite.category === selectedCategory;
+        return matchesSearch && matchesCategory;
+    });
+
     favoritesList.innerHTML = '';
+
     if (favorites.length === 0) {
         favoritesList.innerHTML = '<p class="empty-message">No favorites yet. Add your first favorite place above!</p>';
         return;
     }
-    favorites.forEach(function(favorite) {
+
+    if (filtered.length === 0) {
+        favoritesList.innerHTML = '<p class="empty-message">No favorites match your search.</p>';
+        return;
+    }
+
+    filtered.forEach(function(favorite) {
+        const index = favorites.indexOf(favorite);
         const stars = '⭐'.repeat(favorite.rating);
         favoritesList.innerHTML += `
             <div class="favorite-card">
@@ -44,8 +73,21 @@ function displayFavorites() {
                 <div class="favorite-rating">${stars} (${favorite.rating}/5)</div>
                 <p class="favorite-notes">${favorite.notes}</p>
                 <p class="favorite-date">Added: ${favorite.dateAdded}</p>
+                <button class="btn-danger" onclick="deleteFavorite(${index})">Delete</button>
             </div>`;
     });
 }
+
+
+function deleteFavorite(index) {
+    const favorite = favorites[index];
+    if (confirm(`Delete "${favorite.name}"?`)) {
+        favorites.splice(index, 1);
+        searchFavorites();   // keeps the current search/filter
+    }
+}
+
+searchInput.addEventListener('input', searchFavorites);
+categoryFilter.addEventListener('change', searchFavorites);
 
 displayFavorites();
