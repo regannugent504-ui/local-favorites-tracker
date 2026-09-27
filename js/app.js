@@ -2,8 +2,10 @@ let favorites = [];
 
 const form = document.getElementById('add-favorite-form');
 const favoritesList = document.getElementById('favorites-list');
-const searchInput = document.getElementById('search-input');          // NEW
-const categoryFilter = document.getElementById('category-filter');    // NEW
+
+const searchInput = document.getElementById('search-input');          
+const categoryFilter = document.getElementById('category-filter');    
+
 
 
 function addFavorite(event) {
@@ -26,6 +28,7 @@ function addFavorite(event) {
     };
 
     favorites.push(newFavorite);
+    saveFavorites();      // new
     form.reset();
     displayFavorites();
 }
@@ -82,7 +85,7 @@ function searchFavorites() {
 function deleteFavorite(index) {
     const favorite = favorites[index];
     if (confirm(`Delete "${favorite.name}"?`)) {
-        favorites.splice(index, 1);
+        favorites.splice(index, 1); saveFavorites();
         searchFavorites();   // keeps the current search/filter
     }
 }
@@ -90,4 +93,25 @@ function deleteFavorite(index) {
 searchInput.addEventListener('input', searchFavorites);
 categoryFilter.addEventListener('change', searchFavorites);
 
+function saveFavorites() {
+    try {
+        localStorage.setItem('localFavorites', JSON.stringify(favorites));
+    } catch (error) {
+        alert('Unable to save favorites. Storage may be disabled.');
+    }
+}
+function loadFavorites() {
+    try {
+        const saved = localStorage.getItem('localFavorites');
+        if (saved) {
+            favorites = JSON.parse(saved);
+        } else {
+            favorites = [];
+        }
+    } catch (error) {
+        favorites = [];
+    }
+}
+
+loadFavorites();
 displayFavorites();
