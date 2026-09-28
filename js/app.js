@@ -121,7 +121,7 @@ clearAllButton.addEventListener('click', clearAll);
 
 searchInput.addEventListener('input', searchFavorites);
 categoryFilter.addEventListener('change', searchFavorites);
-ratingFilter.addEventListener('change', searchFavorites);   // NEW
+ratingFilter.addEventListener('change', searchFavorites);   
 
 function saveFavorites() {
     try {
