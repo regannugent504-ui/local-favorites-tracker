@@ -2,41 +2,52 @@ let favorites = [];
 
 const form = document.getElementById('add-favorite-form');
 const favoritesList = document.getElementById('favorites-list');
-
 const searchInput = document.getElementById('search-input');          
 const categoryFilter = document.getElementById('category-filter');    
-
-
+const nameError = document.getElementById('name-error');
+const categoryError = document.getElementById('category-error');
+const ratingError = document.getElementById('rating-error');
+const ratingFilter = document.getElementById('rating-filter');
+const favoritesCount = document.getElementById('favorites-count');
+const clearAllButton = document.getElementById('clear-all');
 
 function addFavorite(event) {
     event.preventDefault();
 
     const name = document.getElementById('name').value.trim();
     const category = document.getElementById('category').value;
+    const rating = document.getElementById('rating').value;
 
-    if (!name || !category) {
-        alert('Please fill in name and category!');
-        return;
-    }
+    nameError.textContent = '';
+    categoryError.textContent = '';
+    ratingError.textContent = '';
+
+    let isValid = true;
+    if (!name) { nameError.textContent = 'Please enter a name.'; isValid = false; }
+    if (!category) { categoryError.textContent = 'Please choose a category.'; isValid = false; }
+    if (!rating) { ratingError.textContent = 'Please choose a rating.'; isValid = false; }
+    if (!isValid) return;
 
     const newFavorite = {
         name: name,
         category: category,
-        rating: parseInt(document.getElementById('rating').value),
+        rating: parseInt(rating),
         notes: document.getElementById('notes').value.trim(),
         dateAdded: new Date().toLocaleDateString()
     };
 
     favorites.push(newFavorite);
-    saveFavorites();      // new
+    saveFavorites();
     form.reset();
     displayFavorites();
 }
+
 form.addEventListener('submit', addFavorite);
 
 function displayFavorites() {
     searchInput.value = '';
     categoryFilter.value = 'all';
+    ratingFilter.value = 'all';   
     searchFavorites();
 }
 
@@ -44,6 +55,7 @@ function displayFavorites() {
 function searchFavorites() {
     const searchText = searchInput.value.toLowerCase().trim();
     const selectedCategory = categoryFilter.value;
+    const selectedRating = ratingFilter.value;
 
     const filtered = favorites.filter(function(favorite) {
         const matchesSearch = searchText === '' ||
@@ -51,8 +63,16 @@ function searchFavorites() {
             favorite.notes.toLowerCase().includes(searchText);
         const matchesCategory = selectedCategory === 'all' ||
             favorite.category === selectedCategory;
-        return matchesSearch && matchesCategory;
+        const matchesRating = selectedRating === 'all' ||
+            favorite.rating === Number(selectedRating);      
+        return matchesSearch && matchesCategory && matchesRating;
+
     });
+    if (filtered.length === favorites.length) {
+        favoritesCount.textContent = `You have ${favorites.length} favorite${favorites.length === 1 ? '' : 's'}`;
+    } else {
+        favoritesCount.textContent = `Showing ${filtered.length} of ${favorites.length} favorites`;
+    }
 
     favoritesList.innerHTML = '';
 
@@ -72,7 +92,7 @@ function searchFavorites() {
         favoritesList.innerHTML += `
             <div class="favorite-card">
                 <h3>${favorite.name}</h3>
-                <span class="favorite-category">${favorite.category}</span>
+                <span class="favorite-category category-${favorite.category.toLowerCase()}">${favorite.category}</span> 
                 <div class="favorite-rating">${stars} (${favorite.rating}/5)</div>
                 <p class="favorite-notes">${favorite.notes}</p>
                 <p class="favorite-date">Added: ${favorite.dateAdded}</p>
@@ -89,9 +109,19 @@ function deleteFavorite(index) {
         searchFavorites();   // keeps the current search/filter
     }
 }
+function clearAll() {
+    if (favorites.length === 0) return;
+    if (confirm('Delete ALL favorites? This cannot be undone.')) {
+        favorites = [];
+        saveFavorites();
+        displayFavorites();
+    }
+}
+clearAllButton.addEventListener('click', clearAll);
 
 searchInput.addEventListener('input', searchFavorites);
 categoryFilter.addEventListener('change', searchFavorites);
+ratingFilter.addEventListener('change', searchFavorites);   // NEW
 
 function saveFavorites() {
     try {
