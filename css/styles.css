@@ -114,6 +114,7 @@ header {
 }
   h1 {
   text-align: center;
+  color: var(--color-bg);
 }
 
 /* ---------- Responsive ---------- */
@@ -124,7 +125,7 @@ header {
 /* ---------- Footer ---------- */
 footer {
   padding: 2.5rem 5vw;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--font-stack);
   color: var(--muted);
   font-size: 0.85rem;
   text-align: center;
@@ -160,14 +161,38 @@ input, select, textarea {
     }
 }
 
+/* BUTTONS */
 .favorite-card {
     padding: var(--space-lg);
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-/* BUTTONS */
+.favorite-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .favorite-card { transition: none; }
+    .favorite-card:hover { transform: none; }
+}
+.favorite-category {
+    display: inline-block;
+    padding: 0.15rem var(--space-sm);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+.category-food     { background: #fde8e4; color: #8a1c0c; }
+.category-coffee   { background: #f3e6d8; color: #5c3410; }
+.category-parks    { background: #dcf1e0; color: #14532d; }
+.category-shopping { background: #e6e0f7; color: #3b1d80; }
+
 .btn-danger {
     background-color: var(--color-danger);
     color: var(--color-surface);
@@ -188,5 +213,14 @@ button {
 .btn-primary:hover {
     background-color: var(--color-accent-strong);
 }
+#clear-all {
+    margin-bottom: var(--space-md);
+}
 
+
+/* Error Message */
+.error-message {
+    color: var(--color-danger);
+    margin-top: calc(var(--space-sm) * -1);
+}
 
