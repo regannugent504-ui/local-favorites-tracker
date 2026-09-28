@@ -16,10 +16,12 @@
 
         <section class="add-section">
             <h2>Add a Favorite</h2>
-            <form id="add-favorite-form">
+            <form id="add-favorite-form" novalidate>
 
                 <label for="name">Name</label>
                 <input type="text" id="name" placeholder="e.g., Starbucks on South University">
+                <p id="name-error" class="error-message" role="alert"></p>
+
 
                 <label for="category">Category</label>
                 <select id="category" name="category" required aria-required="true">                    <option value="">Choose a category</option>
@@ -28,6 +30,8 @@
                     <option value="Parks">Parks</option>
                     <option value="Shopping">Shopping</option>
                 </select>
+                <p id="category-error" class="error-message" role="alert"></p>
+
 
                 <label for="rating">Rating</label>
                   <select id="rating" name="rating" required aria-required="true">
@@ -38,6 +42,7 @@
                     <option value="2">2 stars</option>
                     <option value="1">1 stars</option>
                 </select>
+                <p id="rating-error" class="error-message" role="alert"></p>
 
                 <label for="notes">Notes</label>
                 <textarea id="notes" rows="3"></textarea>
@@ -58,10 +63,22 @@
                 <option value="Parks">Parks</option>
                 <option value="Shopping">Shopping</option>
             </select>
+            
+            <label for="rating-filter">Filter by rating</label>
+            <select id="rating-filter">
+                <option value="all">All ratings</option>
+                <option value="5">5 stars</option>
+                <option value="4">4 stars</option>
+                <option value="3">3 stars</option>
+                <option value="2">2 stars</option>
+                <option value="1">1 star</option>
+           </select>
         </section>
 
         <section class="favorites-section">
             <h2>Your Favorites</h2>
+            <p id="favorites-count"></p>
+            <button type="button" id="clear-all" class="btn-danger">Clear All</button>   <!-- NEW -->
             <div id="favorites-list" class="favorites-grid"></div>
         </section>
 
